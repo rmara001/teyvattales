@@ -1,0 +1,302 @@
+<!-- HTML Document Structure -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags for character encoding and viewport settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the webpage -->
+    <title>Post Details</title>
+    <!-- External CSS files -->
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <link rel="icon" href="/assets/favicon.ico">
+    <!-- External libraries for icons and fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- External JavaScript file -->
+    <script src="script.js"></script>
+    <script>
+        // delete post function
+        function confirmDeletePost(postId) {
+            if (confirm("Are you sure you want to delete this post? This action cannot be undone.")) {
+                window.location.href = '/delete-post/' + postId;
+            }
+        }
+
+        // open hamburger menu
+        const openNavigation = () => {
+            const element = document.getElementById("menu-toggle");
+            const body = document.body;
+            element.classList.toggle("active");
+            body.classList.toggle("no-scroll");
+        }
+
+        // search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchButton = document.querySelector('.search-button');
+            const searchInput = document.getElementById('searchInput');
+
+            searchButton.addEventListener('click', function() {
+                const searchTerm = searchInput.value;
+                window.location.href = `/search-posts?term=${encodeURIComponent(searchTerm)}`;
+            });
+
+            // allow search on pressing Enter key in the search input field
+            searchInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    searchButton.click();
+                }
+            });
+        });
+
+        // delete comment function
+        function deleteComment(commentId) {
+            if (confirm('Are you sure you want to delete this comment?')) {
+                fetch('/delete-comment/' + commentId, {
+                        method: 'DELETE'
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                            alert('Error deleting comment: ' + data.message);
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            } else {
+                console.log('Deletion canceled.');
+            }
+        }
+
+        // show popup
+        function showPopup(popupId) {
+            document.getElementById(popupId).style.display = 'block';
+        }
+
+        // close popup
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+        }
+
+        // function to confirm logout
+        function confirmLogout() {
+            window.location.href = '/logout';
+        }
+
+        // sort comment function
+        function setCommentSortDropdown() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const order = urlParams.get("order");
+            const commentSortSelect = document.getElementById("commentSortSelect");
+
+            // set the selected value based on the order
+            if (order === "DESC") {
+                commentSortSelect.value = "desc";
+            } else if (order === "ASC") {
+                commentSortSelect.value = "asc";
+            } else {
+                commentSortSelect.value = "";
+            }
+        }
+
+        // call the function when the DOM is loaded
+        document.addEventListener("DOMContentLoaded", setCommentSortDropdown);
+
+        // function to handle sorting comments
+        function sortComments() {
+            const selectedSort = document.getElementById("commentSortSelect").value.toUpperCase();
+            const currentUrl = window.location.href;
+            const url = new URL(currentUrl);
+            if (selectedSort !== url.searchParams.get("order")) {
+                url.searchParams.set("order", selectedSort || "DESC");
+                window.location.href = url.toString();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <!-- Forum title -->
+        <div class="header-wrapper">
+            <h1 class="forum-title"><%= forumName %></h1>
+            <!-- Hamburger menu -->
+            <div class="hamburger-menu" onclick="openNavigation()">
+                <%- include('../includes/hamburger-svg') %>
+            </div>
+        </div>
+
+        <!-- Navigation links -->
+        <nav class="navigation">
+            <div class="mobile-menu" id="menu-toggle">
+                <a href="/">Home</a>
+                <a href="/characters">Characters</a>
+                <a href="/about">About</a>
+                <a href="/posts">Forum</a>
+                <a href="/createpost">Create Post</a>
+                <a href="/contact">Contact Us</a>
+                <%- include('../includes/navigation-svg') %>
+            </div>
+
+            <!-- Search bar -->
+            <div class="search-container">
+                <input class="character-search-input" id="searchInput" placeholder="Search Posts" type="text" value="">
+                <button class="search-button"><i class="fas fa-search"></i></button>
+            </div>
+        </nav>
+
+        <!-- Authentication links -->
+        <div class="auth-links">
+            <% if (userLoggedIn) { %>
+            <!-- If user is logged in -->
+            <a href="/myaccount" class="account-link">
+                <span class="desktop-text">My Account</span>
+                <i class="mobile-icon fas fa-user-circle"></i>
+            </a>
+            <a href="/logout" class="logout-link" onclick="event.preventDefault(); showPopup('logoutPopup');">
+                <span class="desktop-text">Logout</span>
+                <i class="mobile-icon fas fa-sign-out-alt"></i>
+            </a>
+            <% } else { %>
+            <!-- If user is not logged in -->
+            <a href="/login" class="login-link">
+                <span class="desktop-text">Login</span>
+                <i class="mobile-icon fas fa-sign-in-alt"></i>
+            </a>
+            <a href="/register" class="register-link">
+                <span class="desktop-text">Sign Up</span>
+                <i class="mobile-icon fas fa-user-plus"></i>
+            </a>
+            <% } %>
+        </div>
+
+        <!-- Logout Confirmation Popup -->
+        <div id="logoutPopup" class="message-popup" style="display: none;">
+            <div class="popup-content">
+                <span class="close-btn" onclick="closePopup('logoutPopup')">&times;</span>
+                <p>Are you sure you want to logout?</p>
+                <button onclick="confirmLogout()">Yes, logout</button>
+                <button onclick="closePopup('logoutPopup')">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        <h3>Post Details</h3>
+        <div class="main-content-wrapper">
+            <div class="post-header">
+                <p class="post-title">"<%= post.title %>"</p>
+            </div>
+
+            <div class="post-body">
+                <img src="<%= post.thumbnail %>" alt="Post Thumbnail" />
+                <p class="post-date">
+                    By: <%= post.username %><br>
+                    Posted on <%= new Date(post.created_at).toISOString().split('T')[0] %><br>
+                    Tag: <a href="/posts/tag/<%= tag %>" class="select-tag"><%= tag %></a>
+                </p>
+                <p class="post-content"><%= post.content %></p>
+                <% if (post.edited) { %>
+                <p class="post-edited-indicator">[Post has been edited]</p>
+                <% } %>
+
+                <% if (userLoggedIn && post.user_id === session.userDbId) { %>
+                <div class="button-container">
+                    <button class="edit-post-button" onclick="location.href='/edit-post/<%= postId %>'">Edit Post</button>
+                    <button class="delete-post-button" onclick="confirmDeletePost('<%= postId %>')">Delete Post</button>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <div class="character-content-wrapper">
+        <!-- Display comment box if user is logged in -->
+        <% if (userLoggedIn) { %>
+        <!-- Comment Form -->
+        <form name="Form" action="/add-comment" id="Form" method="POST">
+            <p>Leave a comment</p>
+            <span class="box"><textarea name="comment" rows="10" placeholder="Write a message"></textarea></span>
+            <input type="hidden" name="postId" value="<%= postId %>" />
+            <button type="submit" class="btn">Send Comment</button>
+        </form>
+        <% } else { %>
+        <!-- If user is not logged in, show a message -->
+        <h3 class="login-message">Please <a href="/login" class="login-link-inline">login</a> to leave a comment.</h3>
+        <% } %>
+
+        <!-- Sort Comment -->
+        <form id="sort-comments-form">
+            <label for="sortOrder">Sort Comments:</label>
+            <select id="commentSortSelect" onchange="sortComments()">
+                <option value="">Default</option>
+                <option value="desc">Newest</option>
+                <option value="asc">Oldest</option>
+            </select>
+        </form>
+
+        <!-- Comments Section -->
+        <% comments.forEach(comment => { %>
+        <div class="comment-box-content">
+            <span class="image"><img src="<%= comment.profileImage %>" alt="Profile image"></span>
+            <div class="comment-info">
+                <span class="name">
+                    <p><%= comment.username %></p>
+                </span>
+                <span class="date">
+                    <p><%= comment.created_at.toISOString().split('T')[0] %></p>
+                </span>
+            </div>
+            <div class="comment-box-comment">
+                <p><%= comment.comment %></p>
+            </div>
+            <div class="comment-box-footer">
+                <% if (userLoggedIn && comment.user_id === session.userDbId) { %>
+                <button onclick="deleteComment('<%= comment.id %>')">Delete</button>
+                <% } %>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer character-footer">
+        <div>
+            <!-- Forum name -->
+            <h3><%= forumName %></h3>
+            <!-- Disclaimer -->
+            <p class="info">Genshin Impact™ is a registered trademark of HoYoverse Co., Ltd. This site is not affiliated with or endorsed by HoYoverse. Images and data © HoYoverse Co., Ltd.</p>
+        </div>
+        <div>
+            <!-- Contact information -->
+            <h3>Reach out</h3>
+            <p>teyvattales@gmail.com</p>
+            <!-- Social media links -->
+            <div class="social-links-horizontal">
+                <a href="https://www.youtube.com/c/GenshinImpact" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://twitter.com/GenshinImpact" class="social-icon" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/genshinimpact" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.reddit.com/r/Genshin_Impact/" class="social-icon" target="_blank"><i class="fab fa-reddit"></i></a>
+            </div>
+        </div>
+        <div>
+            <!-- Links -->
+            <h3>Helpful Resources</h3>
+            <a href="/characters">Characters</a>
+            <br>
+            <a href="/about">About</a>
+            <br>
+            <a href="/posts">Forum</a>
+            <br>
+            <a href="/contact">Contact Us</a>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,144 @@
+<!-- HTML Document Structure -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags for character encoding and viewport settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the webpage -->
+    <title>About</title>
+    <!-- External CSS files -->
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <link rel="icon" href="/assets/favicon.ico">
+    <!-- External libraries for icons and fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- External JavaScript file -->
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <!-- Forum title -->
+        <div class="header-wrapper">
+            <h1 class="forum-title"><%= forumName %></h1>
+            <!-- Hamburger menu -->
+            <div class="hamburger-menu" onclick="openNavigation()">
+                <%- include('../includes/hamburger-svg') %>
+            </div>
+        </div>
+
+        <!-- Navigation links -->
+        <nav class="navigation">
+            <div class="mobile-menu" id="menu-toggle">
+                <a href="/">Home</a>
+                <a href="/characters">Characters</a>
+                <a href="/about">About</a>
+                <a href="/posts">Forum</a>
+                <a href="/createpost">Create Post</a>
+                <a href="/contact">Contact Us</a>
+                <%- include('../includes/navigation-svg') %>
+            </div>
+
+            <!-- Search bar -->
+            <div class="search-container">
+                <input class="character-search-input" id="searchInput" placeholder="Search Posts" type="text" value="">
+                <button class="search-button"><i class="fas fa-search"></i></button>
+            </div>
+        </nav>
+
+        <!-- Authentication links -->
+        <div class="auth-links">
+            <% if (userLoggedIn) { %>
+                <!-- If user is logged in -->
+                <span class="welcome-message">Welcome back, <%= username || '' %></span>
+                <a href="/myaccount" class="account-link">
+                    <span class="desktop-text">My Account</span>
+                    <i class="mobile-icon fas fa-user-circle"></i>
+                </a>
+                <a href="/logout" class="logout-link" onclick="event.preventDefault(); showPopup('logoutPopup');">
+                    <span class="desktop-text">Logout</span>
+                    <i class="mobile-icon fas fa-sign-out-alt"></i>
+                </a>
+                <% } else { %>
+                    <!-- If user is not logged in -->
+                    <a href="/login" class="login-link">
+                        <span class="desktop-text">Login</span>
+                        <i class="mobile-icon fas fa-sign-in-alt"></i>
+                    </a>
+                    <a href="/register" class="register-link">
+                        <span class="desktop-text">Sign Up</span>
+                        <i class="mobile-icon fas fa-user-plus"></i>
+                    </a>
+                    <% } %>
+        </div>
+
+        <!-- Logout Confirmation Popup -->
+        <div id="logoutPopup" class="message-popup" style="display: none;">
+            <div class="popup-content">
+                <span class="close-btn" onclick="closePopup('logoutPopup')">&times;</span>
+                <p>Are you sure you want to logout?</p>
+                <button onclick="confirmLogout()">Yes, logout</button>
+                <button onclick="closePopup('logoutPopup')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Banner Section -->
+    <section class="hero-image short-hero">
+    </section>
+
+    <!-- Main Content Section -->
+    <div class="character-content">
+        <h3>Info</h3>
+        <div class="character-content-wrapper">
+            <!-- Description of the game -->
+            <h4>A Grand Fantasy Journey</h4>
+            <p>Take part in an engaging single-player adventure. Discover the secrets of Teyvat and yourself as a traveler from another world setting out to reconcile with your long-lost sibling.</p>
+            <h4>World Exploration</h4>
+            <p>Traverse the vast expanse of the sky, swim through glistening lakes, and ascend high peaks. Explore off the main track to unearth all the mysteries and wonders of a world full of unanswered questions.</p>
+            <h4>Explore Alone or Team Up</h4>
+            <p>Take on foes solo or team up with friends to battle formidable monsters with cross-play available on PS4, iOS, Android, and PC, supporting up to 4 players.</p>
+            <h4>Harness Elemental Mastery</h4>
+            <p>Using the various elements to your advantage will help you solve difficult puzzles and overcome strong opponents. </p>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer character-footer">
+        <div>
+            <!-- Forum name -->
+            <h3><%= forumName %></h3>
+            <!-- Disclaimer -->
+            <p class="info">Genshin Impact™ is a registered trademark of HoYoverse Co., Ltd. This site is not affiliated with or endorsed by HoYoverse. Images and data © HoYoverse Co., Ltd.</p>
+        </div>
+        <div>
+            <!-- Contact information -->
+            <h3>Reach out</h3>
+            <p>teyvattales@gmail.com</p>
+            <!-- Social media links -->
+            <div class="social-links-horizontal">
+                <a href="https://www.youtube.com/c/GenshinImpact" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://twitter.com/GenshinImpact" class="social-icon" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/genshinimpact" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.reddit.com/r/Genshin_Impact/" class="social-icon" target="_blank"><i class="fab fa-reddit"></i></a>
+            </div>
+        </div>
+        <div>
+        <!-- Links -->
+        <h3>Helpful Resources</h3>
+        <a href="characters">Characters</a>
+        <br>
+        <a href="about">About</a>
+        <br>
+        <a href="posts">Forum</a>
+        <br>
+        <a href="contact">Contact Us</a>
+        </div>
+    </footer>
+</body>
+
+</html>

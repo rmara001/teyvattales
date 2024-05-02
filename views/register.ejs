@@ -1,0 +1,139 @@
+<!-- HTML Document Structure -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags for character encoding and viewport settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the webpage -->
+    <title>Register</title>
+    <!-- External CSS files -->
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <link rel="icon" href="/assets/favicon.ico">
+    <!-- External libraries for icons and fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- External JavaScript file -->
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <!-- Forum title -->
+        <div class="header-wrapper">
+            <h1 class="forum-title"><%= forumName %></h1>
+            <!-- Hamburger menu -->
+            <div class="hamburger-menu" onclick="openNavigation()">
+                <%- include('../includes/hamburger-svg') %>
+            </div>
+        </div>
+
+        <!-- Navigation links -->
+        <nav class="navigation">
+            <div class="mobile-menu" id="menu-toggle">
+                <a href="/">Home</a>
+                <a href="/characters">Characters</a>
+                <a href="/about">About</a>
+                <a href="/posts">Forum</a>
+                <a href="/createpost">Create Post</a>
+                <a href="/contact">Contact Us</a>
+                <%- include('../includes/navigation-svg') %>
+            </div>
+
+            <!-- Search bar -->
+            <div class="search-container">
+                <input class="character-search-input" id="searchInput" placeholder="Search Posts" type="text" value="">
+                <button class="search-button"><i class="fas fa-search"></i></button>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Hero Banner Section -->
+    <section class="hero-image short-hero">
+    </section>
+
+    <!-- Main Content Section -->
+    <div class="character-content">
+        <h3>Register</h3>
+        <div class="character-content-wrapper">
+            <form action="/register" method="post">
+                <label for="title">First Name*</label>
+                <input id="first" type="text" name="first" placeholder="First name" required pattern="[A-Za-z]+" title="Use only letters without spaces">
+                <label for="title">Last name*</label>
+                <input id="last" type="text" name="last" placeholder="Last name" required pattern="[A-Za-z]+" title="Use only letters without spaces">
+                <label for="title">Email*</label>
+                <input id="email" type="email" name="email" placeholder="Email" oninput="this.value = this.value.toLowerCase()" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
+                <label for="title">Username*</label>
+                <input id="username" type="text" name="username" placeholder="Username" pattern="[A-Za-z]{3,}" title="Please enter at least 3 letters." required>
+                <label for="password">Password*</label>
+                <input id="password" type="password" name="password" placeholder="Password" required pattern="(?=.*\d)(?=.*[A-Z]).{8,}" title="Please enter a strong password (at least 8 characters with at least one uppercase letter and one number).">
+
+                <button type="submit">Register</button>
+            </form>
+
+            <span class="signup">Already have an account?
+        <a href="/login">Login here</a></span>
+
+            <!-- Message Popup -->
+            <div id="errorPopup" class="message-popup">
+                <div class="popup-content">
+                    <span class="close-btn" onclick="closePopup('errorPopup')">&times;</span>
+                    <% if (errorMessage) { %>
+                        <p>
+                            <%= errorMessage %>
+                        </p>
+                        <% } %>
+                </div>
+            </div>
+
+            <div id="successPopup" class="message-popup">
+                <div class="popup-content">
+                    <span class="close-btn" onclick="closePopup('successPopup')">&times;</span>
+                    <% if (successMessage) { %>
+                        <p>
+                            <%= successMessage %>
+                        </p>
+                        <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer character-footer">
+        <div>
+            <!-- Forum name -->
+            <h3><%= forumName %></h3>
+            <!-- Disclaimer -->
+            <p class="info">Genshin Impact™ is a registered trademark of HoYoverse Co., Ltd. This site is not affiliated with or endorsed by HoYoverse. Images and data © HoYoverse Co., Ltd.</p>
+        </div>
+        <div>
+            <!-- Contact information -->
+            <h3>Reach out</h3>
+            <p>teyvattales@gmail.com</p>
+            <!-- Social media links -->
+            <div class="social-links-horizontal">
+                <a href="https://www.youtube.com/c/GenshinImpact" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://twitter.com/GenshinImpact" class="social-icon" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/genshinimpact" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.reddit.com/r/Genshin_Impact/" class="social-icon" target="_blank"><i class="fab fa-reddit"></i></a>
+            </div>
+        </div>
+        <div>
+        <!-- Links -->
+        <h3>Helpful Resources</h3>
+        <a href="characters">Characters</a>
+        <br>
+        <a href="about">About</a>
+        <br>
+        <a href="posts">Forum</a>
+        <br>
+        <a href="contact">Contact Us</a>
+        </div>
+    </footer>
+</body>
+
+</html>
