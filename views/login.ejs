@@ -26,33 +26,33 @@
         <div class="header-wrapper">
             <h1 class="forum-title"><%= forumName %></h1>
             <!-- Hamburger menu -->
-            <div class="hamburger-menu" onclick="openNavigation()">
+            <div class="hamburger-menu" onclick="openNavigation()" aria-label="Toggle navigation menu">
                 <%- include('../includes/hamburger-svg') %>
             </div>
         </div>
 
         <!-- Navigation links -->
         <nav class="navigation">
-            <div class="mobile-menu" id="menu-toggle">
-                <a href="/">Home</a>
-                <a href="/characters">Characters</a>
-                <a href="/about">About</a>
-                <a href="/posts">Forum</a>
-                <a href="/createpost">Create Post</a>
-                <a href="/contact">Contact Us</a>
+            <div class="mobile-menu" id="menu-toggle" aria-label="Main navigation menu">
+                <a href="/" aria-label="Home">Home</a>
+                <a href="/characters" aria-label="Characters">Characters</a>
+                <a href="/about" aria-label="About">About</a>
+                <a href="/posts" aria-label="Forum">Forum</a>
+                <a href="/createpost" aria-label="Create Post">Create Post</a>
+                <a href="/contact" aria-label="Contact Us">Contact Us</a>
                 <%- include('../includes/navigation-svg') %>
             </div>
 
             <!-- Search bar -->
-            <div class="search-container">
+            <div class="search-container" aria-label="Search bar">
                 <input class="character-search-input" id="searchInput" placeholder="Search Posts" type="text" value="">
-                <button class="search-button"><i class="fas fa-search"></i></button>
+                <button class="search-button" aria-label="Search"><i class="fas fa-search"></i></button>
             </div>
         </nav>
     </div>
 
     <!-- Hero Banner Section -->
-    <section class="hero-image short-hero">
+    <section class="hero-image short-hero" aria-label="Hero Banner">
     </section>
 
     <!-- Main Content Section -->
@@ -61,20 +61,20 @@
         <div class="character-content-wrapper">
             <form action="/login" method="post">
                 <label for="title">Username*</label>
-                <input id="username" type="text" name="username" placeholder="Username" required>
+                <input id="username" type="text" name="username" placeholder="Username" required aria-label="Username">
                 <label for="title">Password*</label>
-                <input id="password" type="password" name="password" placeholder="Password" required>
+                <input id="password" type="password" name="password" placeholder="Password" required aria-label="Password">
 
                 <button type="submit">Login</button>
             </form>
 
             <span class="signup">Don't have an account?
-                <a href="/register">Register here</a></span>
+                <a href="/register" aria-label="Register">Register here</a></span>
 
             <!-- Message Popup -->
             <div id="errorPopup" class="message-popup">
                 <div class="popup-content">
-                    <span class="close-btn" onclick="closePopup('errorPopup')">&times;</span>
+                    <span class="close-btn" onclick="closePopup('errorPopup')" aria-label="Close">&times;</span>
                     <% if (errorMessage) { %>
                     <p>
                         <%= errorMessage %>
@@ -99,22 +99,22 @@
             <p>teyvattales@gmail.com</p>
             <!-- Social media links -->
             <div class="social-links-horizontal">
-                <a href="https://www.youtube.com/c/GenshinImpact" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="https://twitter.com/GenshinImpact" class="social-icon" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.instagram.com/genshinimpact" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.reddit.com/r/Genshin_Impact/" class="social-icon" target="_blank"><i class="fab fa-reddit"></i></a>
+                <a href="https://www.youtube.com/c/GenshinImpact" class="social-icon" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://twitter.com/GenshinImpact" class="social-icon" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/genshinimpact" class="social-icon" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.reddit.com/r/Genshin_Impact/" class="social-icon" target="_blank" aria-label="Reddit"><i class="fab fa-reddit"></i></a>
             </div>
         </div>
         <div>
         <!-- Links -->
         <h3>Helpful Resources</h3>
-        <a href="characters">Characters</a>
+        <a href="characters" aria-label="Characters">Characters</a>
         <br>
-        <a href="about">About</a>
+        <a href="about" aria-label="About">About</a>
         <br>
-        <a href="posts">Forum</a>
+        <a href="posts" aria-label="Forum">Forum</a>
         <br>
-        <a href="contact">Contact Us</a>
+        <a href="contact" aria-label="Contact Us">Contact Us</a>
         </div>
     </footer>
 </body>

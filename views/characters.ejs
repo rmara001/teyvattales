@@ -26,27 +26,27 @@
         <div class="header-wrapper">
             <h1 class="forum-title"><%= forumName %></h1>
             <!-- Hamburger menu -->
-            <div class="hamburger-menu" onclick="openNavigation()">
+            <div class="hamburger-menu" onclick="openNavigation()" aria-label="Toggle navigation menu">
                 <%- include('../includes/hamburger-svg') %>
             </div>
         </div>
 
         <!-- Navigation links -->
         <nav class="navigation">
-            <div class="mobile-menu" id="menu-toggle">
-                <a href="/">Home</a>
-                <a href="/characters">Characters</a>
-                <a href="/about">About</a>
-                <a href="/posts">Forum</a>
-                <a href="/createpost">Create Post</a>
-                <a href="/contact">Contact Us</a>
+            <div class="mobile-menu" id="menu-toggle" aria-label="Main navigation menu">
+                <a href="/" aria-label="Home">Home</a>
+                <a href="/characters" aria-label="Characters">Characters</a>
+                <a href="/about" aria-label="About">About</a>
+                <a href="/posts" aria-label="Forum">Forum</a>
+                <a href="/createpost" aria-label="Create Post">Create Post</a>
+                <a href="/contact" aria-label="Contact Us">Contact Us</a>
                 <%- include('../includes/navigation-svg') %>
             </div>
 
             <!-- Search bar -->
-            <div class="search-container">
+            <div class="search-container" aria-label="Search bar">
                 <input class="search-input" placeholder="Search Posts" type="text" value="">
-                <button class="search-button"><i class="fas fa-search"></i></button>
+                <button class="search-button" aria-label="Search"><i class="fas fa-search"></i></button>
             </div>
         </nav>
 
@@ -55,21 +55,21 @@
             <% if (userLoggedIn) { %>
                 <!-- If user is logged in -->
                 <span class="welcome-message">Welcome back, <%= username || '' %></span>
-                <a href="/myaccount" class="account-link">
+                <a href="/myaccount" class="account-link" aria-label="My Account">
                     <span class="desktop-text">My Account</span>
                     <i class="mobile-icon fas fa-user-circle"></i>
                 </a>
-                <a href="/logout" class="logout-link" onclick="event.preventDefault(); showPopup('logoutPopup');">
+                <a href="/logout" class="logout-link" onclick="event.preventDefault(); showPopup('logoutPopup');" aria-label="Logout">
                     <span class="desktop-text">Logout</span>
                     <i class="mobile-icon fas fa-sign-out-alt"></i>
                 </a>
                 <% } else { %>
                     <!-- If user is not logged in -->
-                    <a href="/login" class="login-link">
+                    <a href="/login" class="login-link" aria-label="Login">
                         <span class="desktop-text">Login</span>
                         <i class="mobile-icon fas fa-sign-in-alt"></i>
                     </a>
-                    <a href="/register" class="register-link">
+                    <a href="/register" class="register-link" aria-label="Sign Up">
                         <span class="desktop-text">Sign Up</span>
                         <i class="mobile-icon fas fa-user-plus"></i>
                     </a>
@@ -79,16 +79,16 @@
         <!-- Logout Confirmation Popup -->
         <div id="logoutPopup" class="message-popup" style="display: none;">
             <div class="popup-content">
-                <span class="close-btn" onclick="closePopup('logoutPopup')">&times;</span>
+                <span class="close-btn" onclick="closePopup('logoutPopup')" aria-label="Close">&times;</span>
                 <p>Are you sure you want to logout?</p>
-                <button onclick="confirmLogout()">Yes, logout</button>
-                <button onclick="closePopup('logoutPopup')">Cancel</button>
+                <button onclick="confirmLogout()" aria-label="Confirm logout">Yes, logout</button>
+                <button onclick="closePopup('logoutPopup')" aria-label="Cancel logout">Cancel</button>
             </div>
         </div>
     </div>
 
     <!-- Hero Banner Section -->
-    <section class="hero-image short-hero">
+    <section class="hero-image short-hero" aria-label="Hero Banner Section">
     </section>
 
     <!-- Main Content Section -->
@@ -98,39 +98,38 @@
             <div class="selector">
                 <div class="selector-list">
                     <!-- Star Filters -->
-                    <img class="selector-item" data-category="star" filter="star-4" title="4 Star" src="https://rerollcdn.com/GENSHIN/UI/rarity_4.png">
-                    <img class="selector-item" data-category="star" filter="star-5" title="5 Star" src="https://rerollcdn.com/GENSHIN/UI/rarity_5.png">
-                    <div class="selector-separator"></div>
+                    <img class="selector-item" data-category="star" filter="star-4" title="4 Star" src="https://rerollcdn.com/GENSHIN/UI/rarity_4.png" aria-label="Filter by 4 Star">
+                    <img class="selector-item" data-category="star" filter="star-5" title="5 Star" src="https://rerollcdn.com/GENSHIN/UI/rarity_5.png" aria-label="Filter by 5 Star">
+                    <div class="selector-separator" aria-hidden="true"></div>
 
                     <!-- Element Filters -->
-                    <img class="selector-item" data-category="element" filter="Anemo" title="Anemo" src="https://rerollcdn.com/GENSHIN/UI/element_anemo.png">
-                    <img class="selector-item" data-category="element" filter="Cryo" title="Cryo" src="https://rerollcdn.com/GENSHIN/UI/element_cryo.png">
-                    <img class="selector-item" data-category="element" filter="Electro" title="Electro" src="https://rerollcdn.com/GENSHIN/UI/element_electro.png">
-                    <img class="selector-item" data-category="element" filter="Dendro" title="Dendro" src="https://rerollcdn.com/GENSHIN/UI/element_dendro.png">
-                    <img class="selector-item" data-category="element" filter="Geo" title="Geo" src="https://rerollcdn.com/GENSHIN/UI/element_geo.png">
-                    <img class="selector-item" data-category="element" filter="Hydro" title="Hydro" src="https://rerollcdn.com/GENSHIN/UI/element_hydro.png">
-                    <img class="selector-item" data-category="element" filter="Pyro" title="Pyro" src="https://rerollcdn.com/GENSHIN/UI/element_pyro.png">
-                    <div class="selector-separator"></div>
+                    <img class="selector-item" data-category="element" filter="Anemo" title="Anemo" src="https://rerollcdn.com/GENSHIN/UI/element_anemo.png" aria-label="Filter by Anemo Element">
+                    <img class="selector-item" data-category="element" filter="Cryo" title="Cryo" src="https://rerollcdn.com/GENSHIN/UI/element_cryo.png" aria-label="Filter by Cryo Element">
+                    <img class="selector-item" data-category="element" filter="Electro" title="Electro" src="https://rerollcdn.com/GENSHIN/UI/element_electro.png" aria-label="Filter by Electro Element">
+                    <img class="selector-item" data-category="element" filter="Dendro" title="Dendro" src="https://rerollcdn.com/GENSHIN/UI/element_dendro.png" aria-label="Filter by Dendro Element">
+                    <img class="selector-item" data-category="element" filter="Geo" title="Geo" src="https://rerollcdn.com/GENSHIN/UI/element_geo.png" aria-label="Filter by Geo Element">
+                    <img class="selector-item" data-category="element" filter="Hydro" title="Hydro" src="https://rerollcdn.com/GENSHIN/UI/element_hydro.png" aria-label="Filter by Hydro Element">
+                    <img class="selector-item" data-category="element" filter="Pyro" title="Pyro" src="https://rerollcdn.com/GENSHIN/UI/element_pyro.png" aria-label="Filter by Pyro Element">
+                    <div class="selector-separator" aria-hidden="true"></div>
 
                     <!-- Weapon Filters -->
-                    <img class="selector-item" data-category="weapon" filter="Bow" title="Bow" src="https://rerollcdn.com/GENSHIN/UI/weapon_bow.png">
-                    <img class="selector-item" data-category="weapon" filter="Catalyst" title="Catalyst" src="https://rerollcdn.com/GENSHIN/UI/weapon_catalyst.png">
-                    <img class="selector-item" data-category="weapon" filter="Claymore" title="Claymore" src="https://rerollcdn.com/GENSHIN/UI/weapon_claymore.png">
-                    <img class="selector-item" data-category="weapon" filter="Polearm" title="Polearm" src="https://rerollcdn.com/GENSHIN/UI/weapon_polearm.png">
-                    <img class="selector-item" data-category="weapon" filter="Sword" title="Sword" src="https://rerollcdn.com/GENSHIN/UI/weapon_sword.png">
+                    <img class="selector-item" data-category="weapon" filter="Bow" title="Bow" src="https://rerollcdn.com/GENSHIN/UI/weapon_bow.png" aria-label="Filter by Bow Weapon">
+                    <img class="selector-item" data-category="weapon" filter="Catalyst" title="Catalyst" src="https://rerollcdn.com/GENSHIN/UI/weapon_catalyst.png" aria-label="Filter by Catalyst Weapon">
+                    <img class="selector-item" data-category="weapon" filter="Claymore" title="Claymore" src="https://rerollcdn.com/GENSHIN/UI/weapon_claymore.png" aria-label="Filter by Claymore Weapon">
+                    <img class="selector-item" data-category="weapon" filter="Polearm" title="Polearm" src="https://rerollcdn.com/GENSHIN/UI/weapon_polearm.png" aria-label="Filter by Polearm Weapon">
+                    <img class="selector-item" data-category="weapon" filter="Sword" title="Sword" src="https://rerollcdn.com/GENSHIN/UI/weapon_sword.png" aria-label="Filter by Sword Weapon">
                 </div>
             </div>
 
             <!-- Search bar -->
             <div class="search-and-clear">
                 <div class="character-search">
-                    <input class="character-search-input" id="searchInput" placeholder="Search..." type="text" value="">
+                    <input class="character-search-input" id="searchInput" placeholder="Search..." type="text" value="" aria-label="Search">
                     <div class="character-search-close" id="searchCloseButton" aria-label="Reset search input">
                         <span class="tooltip" aria-hidden="true">Reset search input</span>
                     </div>
                 </div>
-                <!-- Clear Filters Button -->
-                <button id="clearFilters" class="clear-filters-btn">Clear Filters</button>
+                <button id="clearFilters" class="clear-filters-btn" aria-label="Clear Filters">Clear Filters</button>
             </div>
 
             <%- include('../includes/characterslist') %>
@@ -151,22 +150,22 @@
             <p>teyvattales@gmail.com</p>
             <!-- Social media links -->
             <div class="social-links-horizontal">
-                <a href="https://www.youtube.com/c/GenshinImpact" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="https://twitter.com/GenshinImpact" class="social-icon" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.instagram.com/genshinimpact" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.reddit.com/r/Genshin_Impact/" class="social-icon" target="_blank"><i class="fab fa-reddit"></i></a>
+                <a href="https://www.youtube.com/c/GenshinImpact" class="social-icon" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://twitter.com/GenshinImpact" class="social-icon" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/genshinimpact" class="social-icon" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.reddit.com/r/Genshin_Impact/" class="social-icon" target="_blank" aria-label="Reddit"><i class="fab fa-reddit"></i></a>
             </div>
         </div>
         <div>
         <!-- Links -->
         <h3>Helpful Resources</h3>
-        <a href="characters">Characters</a>
+        <a href="characters" aria-label="Characters">Characters</a>
         <br>
-        <a href="about">About</a>
+        <a href="about" aria-label="About">About</a>
         <br>
-        <a href="posts">Forum</a>
+        <a href="posts" aria-label="Forum">Forum</a>
         <br>
-        <a href="contact">Contact Us</a>
+        <a href="contact" aria-label="Contact Us">Contact Us</a>
         </div>
     </footer>
 </body>
