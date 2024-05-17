@@ -26,7 +26,7 @@
         <div class="header-wrapper">
             <h1 class="forum-title"><%= forumName %></h1>
             <!-- Hamburger menu -->
-            <div class="hamburger-menu" onclick="openNavigation()" aria-label="Toggle navigation menu">
+            <div class="hamburger-menu" onclick="openNavigation()" role="button" tabindex="0" aria-label="Toggle navigation menu" onkeydown="if (event.key === 'Enter') openNavigation();">
                 <%- include('../includes/hamburger-svg') %>
             </div>
         </div>
@@ -158,10 +158,10 @@
             <p>teyvattales@gmail.com</p>
             <!-- Social media links -->
             <div class="social-links-horizontal">
-                <a href="https://www.youtube.com/c/GenshinImpact" class="social-icon" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="https://twitter.com/GenshinImpact" class="social-icon" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.instagram.com/genshinimpact" class="social-icon" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.reddit.com/r/Genshin_Impact/" class="social-icon" target="_blank" aria-label="Reddit"><i class="fab fa-reddit"></i></a>
+                <a href="https://www.youtube.com/c/GenshinImpact" class="social-icon" target="_blank" title="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                <a href="https://twitter.com/GenshinImpact" class="social-icon" target="_blank" title="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/genshinimpact" class="social-icon" target="_blank" title="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.reddit.com/r/Genshin_Impact/" class="social-icon" target="_blank" title="Reddit"><i class="fab fa-reddit" aria-hidden="true"></i></a>
             </div>
         </div>
         <div>

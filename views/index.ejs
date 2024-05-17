@@ -26,7 +26,7 @@
         <div class="header-wrapper">
             <h1 class="forum-title"><%= forumName %></h1>
             <!-- Hamburger menu -->
-            <div class="hamburger-menu" onclick="openNavigation()" aria-label="Toggle navigation menu">
+            <div class="hamburger-menu" onclick="openNavigation()" role="button" tabindex="0" aria-label="Toggle navigation menu" onkeydown="if (event.key === 'Enter') openNavigation();">
                 <%- include('../includes/hamburger-svg') %>
             </div>
         </div>
@@ -111,17 +111,17 @@
             <div class="carousel" aria-label="Image Carousel">
                 <div class="carousel-images">
                     <!-- Carousel images -->
-                    <img src="/assets/hero1.webp" class="image active">
-                    <img src="/assets/hero2.webp" class="image">
-                    <img src="/assets/hero3.webp" class="image">
-                    <img src="/assets/hero4.webp" class="image">
-                    <img src="/assets/hero5.webp" class="image">
-                    <img src="/assets/hero6.webp" class="image">
-                    <img src="/assets/hero7.webp" class="image">
-                    <img src="/assets/hero8.webp" class="image">
+                    <img src="/assets/hero1.webp" class="image active" alt="Genshin Impact characters Paimon and the Traveler in Liyue">
+                    <img src="/assets/hero2.webp" class="image" alt="Genshin Impact characters Klee, Albedo, Paimon, Traveler, and Sucrose in a field">
+                    <img src="/assets/hero3.webp" class="image" alt="Genshin Impact characters Neuvilette and Wriothesley in a study">
+                    <img src="/assets/hero4.webp" class="image" alt="Genshin Impact characters Ayaka, Furina, Chiori, Chevreuse and Paimon in a film setting">
+                    <img src="/assets/hero5.webp" class="image" alt="Genshin Impact character Ayato writing and holding a pen">
+                    <img src="/assets/hero6.webp" class="image" alt="Genshin Impact characters Chiori and Kirara in Fontaine">
+                    <img src="/assets/hero7.webp" class="image" alt="Genshin Impact character Dehya in a desert with a giant sword">
+                    <img src="/assets/hero8.webp" class="image" alt="Genshin Impact characters Mona, Fischl, and Kazuha in flying in the sky">
                 </div>
                 <!-- Carousel navigation buttons -->
-                <div class="carousel-dots" aria-label="Carousel Navigation Dots">
+                <div class="carousel-dots" role="group" aria-label="Carousel Navigation Dots">
                 </div>
                 <button class="carousel-button prev" aria-label="Previous Slide">&#10094;</button>
                 <button class="carousel-button next" aria-label="Next Slide">&#10095;</button>
