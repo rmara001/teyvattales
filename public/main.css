@@ -13,12 +13,12 @@
 :root {
     --backgroundColor: #e1d8c7;
     --colorOne: #fafafb;
-    --colorTwo: #efb11d;
+    --colorTwo: #c92d20;
     --colorThree: #fff;
     --colorFour: #ebeef4;
-    --colorFive: #c92d20;
+    --colorFive: #efb11d;
     --colorSix: #cd5f48;
-    --colorSeven: #e5cebc;
+    --colorSeven: #cececed2;
     --colorEight: #7952b9;
     --selectionColor: #cececed2;
     --shadowColor: #525f8014;
@@ -180,7 +180,7 @@ body {
     background-color: var(--colorThree);
     border-radius: 20px;
     border-top: 5px solid var(--colorFour);
-    color: var(--colorSix);
+    color: var(--colorFive);
     font-size: 1.5rem;
     font-style: italic;
     left: 50%;
@@ -191,6 +191,7 @@ body {
     transform: translate(-50%, -50%);
     z-index: 1;
     text-align: center;
+    text-shadow: 1px 1px 1px #000000;
 }
 
 /* content paragraphs */
@@ -205,19 +206,16 @@ body {
 .content a {
     font-size: 1.2rem;
     transition: all 600ms ease;
-    background-color: var(--colorSix);
     border-radius: 20px;
-    border: 2px solid var(--colorSix);
-    color: var(--colorFour);
+    color: var(--colorTwo);
     padding: 5px 20px;
     text-decoration: none;
     margin: 30px 50px;
 }
 
 .content a:hover {
-    background-color: var(--colorFive);
     transition: color 0.3s ease;
-    color: var(--colorThree);
+    color: var(--colorFive);
 }
 
 /* content wrapper */
@@ -260,7 +258,7 @@ body {
 }
 
 .footer h3 {
-    color: var(--colorSix);
+    color: var(--colorTwo);
     font-size: 1.2rem;
 }
 
@@ -278,7 +276,7 @@ body {
 }
 
 .footer a:hover {
-    color: var(--colorTwo);
+    color: var(--colorFive);
     opacity: 1;
     transition: color 0.3s ease;
 }
@@ -541,7 +539,7 @@ form button {
     transition: all 600ms ease;
     background-color: var(--colorSix);
     border-radius: 20px;
-    border: 2px solid var(--colorSix);
+    border: none;
     color: var(--colorThree);
     padding: 5px 20px;
     text-decoration: none;
@@ -906,7 +904,7 @@ body.no-scroll {
 
 .roster .roster-pictures .roster-illustrations {
     align-items: center;
-    background-color: var(--colorTwo);
+    background-color: var(--colorFive);
     border-radius: 5px;
     height: 70px;
     width: 70px;
@@ -951,7 +949,7 @@ body.no-scroll {
     background-color: var(--colorThree);
     border-radius: 20px;
     border-top: 5px solid var(--colorFour);
-    color: var(--colorSix);
+    color: var(--colorFive);
     font-size: 1.5rem;
     font-style: italic;
     left: 50%;
@@ -962,6 +960,7 @@ body.no-scroll {
     transform: translate(-50%, -50%);
     z-index: 1;
     text-align: center;
+    text-shadow: 1px 1px 1px #000000;
 }
 
 .character-content-wrapper {
